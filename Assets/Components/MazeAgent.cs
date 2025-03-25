@@ -1,5 +1,6 @@
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 using UnityEngine;
 
 public class MazeAgent : Agent {
@@ -12,6 +13,8 @@ public class MazeAgent : Agent {
     public override void OnEpisodeBegin() {
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
+        var spawnPos = FindAnyObjectByType<AgentSpawner>();
+        transform.SetPositionAndRotation(spawnPos.transform.position + new Vector3(0, this.transform.localScale.y, 0), spawnPos.transform.rotation);
     }
 
     public float forceMultiplier = 10;
@@ -21,6 +24,12 @@ public class MazeAgent : Agent {
         transform.Rotate(Vector3.up, actionBuffers.ContinuousActions[0] * rotationMultiplier);
         forward *= actionBuffers.ContinuousActions[1];
         rBody.AddForce(forward * forceMultiplier);
+
+        // allow agent to manipulate the ray sensor
+        var raySensor = GetComponent<RayPerceptionSensorComponent3D>();
+        if (raySensor) {
+            raySensor.EndVerticalOffset += actionBuffers.ContinuousActions[2] * 0.001f;
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {
