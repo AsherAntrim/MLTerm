@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 54986532556704750}
   - component: {fileID: 2647913614258727300}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Rays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: MazeAgent
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
