@@ -9,8 +9,15 @@ public class MazeAgent : Agent {
     void Start() {
         rBody = GetComponent<Rigidbody>();
     }
+	
+	public Transform[] transforms;
+	public GameObject edibleWall;
 
     public override void OnEpisodeBegin() {
+		foreach(var t in transforms) {
+			var wall = Instantiate(edibleWall);
+		}
+		
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
         var spawnPos = FindAnyObjectByType<AgentSpawner>();
@@ -27,7 +34,7 @@ public class MazeAgent : Agent {
 
         // allow agent to manipulate the ray sensor
         var raySensor = GetComponent<RayPerceptionSensorComponent3D>();
-        if (raySensor) {
+        if (raySensor && false) {
             raySensor.EndVerticalOffset += actionBuffers.ContinuousActions[2] * 0.001f;
         }
     }
