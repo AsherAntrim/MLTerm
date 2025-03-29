@@ -9,15 +9,18 @@ public class MazeAgent : Agent {
     void Start() {
         rBody = GetComponent<Rigidbody>();
     }
-	
-	public Transform[] transforms;
-	public GameObject edibleWall;
+
+    public Transform[] transforms;
+    public GameObject wall;
 
     public override void OnEpisodeBegin() {
-		foreach(var t in transforms) {
-			var wall = Instantiate(edibleWall);
-		}
-		
+        foreach (var t in transforms) {
+            var newWall = Instantiate(wall);
+            newWall.transform.position = t.position;
+            newWall.transform.rotation = t.rotation;
+            newWall.transform.localScale = t.localScale;
+        }
+
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
         var spawnPos = FindAnyObjectByType<AgentSpawner>();

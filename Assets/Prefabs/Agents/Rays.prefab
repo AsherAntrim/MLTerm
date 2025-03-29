@@ -129,7 +129,7 @@ MonoBehaviour:
   m_DetectableTags: []
   m_RaysPerDirection: 6
   m_MaxRayDegrees: 70
-  m_SphereCastRadius: 0.5
+  m_SphereCastRadius: 0.1
   m_RayLength: 20
   m_RayLayerMask:
     serializedVersion: 2
@@ -203,6 +203,8 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  transforms: []
+  wall: {fileID: 0}
   forceMultiplier: 20
   rotationMultiplier: 5
 --- !u!54 &2647913614258727300
