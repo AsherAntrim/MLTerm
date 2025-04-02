@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Algorithm: 0
-  FullRandom: 0
+  FullRandom: 1
   RandomSeed: 12345
   Floor: {fileID: 165842, guid: 8d3b36f175a633f429d7bda54c76550d, type: 3}
   Wall: {fileID: 144206, guid: 9de82ec743bb24449a99f5cf1e325d61, type: 3}
@@ -775,7 +775,9 @@ MonoBehaviour:
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
+  UseTestObject: 1
   GoalPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
+  TestObjPrefab: {fileID: 4709852248610417087, guid: 82bbd5fac54dd834ea9defda89e217e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

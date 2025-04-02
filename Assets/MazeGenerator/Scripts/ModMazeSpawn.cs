@@ -24,7 +24,9 @@ public class ModMazeSpawn : MonoBehaviour {
 	public float CellWidth = 5;
 	public float CellHeight = 5;
 	public bool AddGaps = true;
+	public bool UseTestObject = true;
 	public GameObject GoalPrefab = null;
+	public GameObject TestObjPrefab = null;
 
 	private BasicMazeGenerator mMazeGenerator = null;
 
@@ -38,8 +40,8 @@ public class ModMazeSpawn : MonoBehaviour {
 		}
 		switch (Algorithm) {
 			case MazeGenerationAlgorithm.PureRecursive:
-				mMazeGenerator = new RecursiveMazeGenerator(Rows, Columns);
-				break;
+                mMazeGenerator = new RecursiveMazeGenerator(Rows, Columns);
+                break;
 			case MazeGenerationAlgorithm.RecursiveTree:
 				mMazeGenerator = new RecursiveTreeMazeGenerator(Rows, Columns);
 				break;
@@ -53,7 +55,9 @@ public class ModMazeSpawn : MonoBehaviour {
 				mMazeGenerator = new DivisionMazeGenerator(Rows, Columns);
 				break;
 		}
-		mMazeGenerator.GenerateMaze();
+        mMazeGenerator.GenerateMaze();
+
+		int testObjCount = Random.Range(0, Rows * Columns + 1);
 		for (int row = 0; row < Rows; row++) {
 			for (int column = 0; column < Columns; column++) {
 				float x = column * (CellWidth + (AddGaps ? .2f : 0));
@@ -82,6 +86,11 @@ public class ModMazeSpawn : MonoBehaviour {
 					tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
 					tmp.transform.parent = transform;
 				}
+				if (testObjCount == 0 && TestObjPrefab != null) {//cell.IsTestObj
+                    tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp.transform.parent = transform;
+                }
+				testObjCount--;
 			}
 		}
 		if (Pillar != null) {
