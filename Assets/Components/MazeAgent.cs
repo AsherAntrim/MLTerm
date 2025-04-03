@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MazeAgent : Agent {
 
-    public GameObject ViewCamera;
     public AgentManager agentManager;
 
     Rigidbody rBody;
@@ -23,20 +22,6 @@ public class MazeAgent : Agent {
         var spawnPos = FindAnyObjectByType<AgentSpawner>();
         if (spawnPos) {
             transform.SetPositionAndRotation(spawnPos.transform.position + new Vector3(0, this.transform.localScale.y, 0), spawnPos.transform.rotation);
-        }
-    }
-
-    void FixedUpdate() {
-        if (ViewCamera != null) {
-            Vector3 direction = (Vector3.up * 2 + Vector3.back) * 2;
-            RaycastHit hit;
-            Debug.DrawLine(transform.position, transform.position + direction, Color.red);
-            if (Physics.Linecast(transform.position, transform.position + direction, out hit)) {
-                ViewCamera.transform.position = hit.point;
-            } else {
-                ViewCamera.transform.position = transform.position + direction;
-            }
-            ViewCamera.transform.LookAt(transform.position);
         }
     }
 
