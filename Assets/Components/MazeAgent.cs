@@ -40,6 +40,10 @@ public class MazeAgent : Agent {
         }
     }
 
+    public override void CollectObservations(VectorSensor sensor) {
+        sensor.AddObservation(transform.position);
+    }
+
     public override void Heuristic(in ActionBuffers actionsOut) {
         var _ = actionsOut.ContinuousActions;
         _[0] = Input.GetAxis("Horizontal");
