@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -29,8 +31,7 @@ public class ModMazeSpawn : MonoBehaviour {
     public GameObject TestObjPrefab = null;
 
     private BasicMazeGenerator mMazeGenerator = null;
-    private int testObjRand = 0;
-    private int testObjCount = 1;
+    private List<int> sortedRandNumbers = new List<int>();
 
     void Start() {
         GenerateMaze();
@@ -59,8 +60,9 @@ public class ModMazeSpawn : MonoBehaviour {
         }
         mMazeGenerator.GenerateMaze();
         if (NumOfTestObjects > 0) {
-            testObjRand = Random.Range(1, Rows * Columns / NumOfTestObjects);
-            testObjCount = NumOfTestObjects;
+            sortedRandNumbers = SortRandNum(1, Rows * Columns, NumOfTestObjects);
+            //testObjRand = Random.Range(1, Rows * Columns / NumOfTestObjects);
+            //testObjCount = NumOfTestObjects;
         }
 
         for (int row = 0; row < Rows; row++) {
@@ -91,15 +93,11 @@ public class ModMazeSpawn : MonoBehaviour {
                     tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
                 }
-                if (testObjRand == 1 && TestObjPrefab != null) {//cell.IsTestObj
+                if (sortedRandNumbers.Count > 0 && sortedRandNumbers[0] == (row * Columns + column) && TestObjPrefab != null) {
                     tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
-                    testObjCount--;
-                    if (testObjCount > 0) {
-                        testObjRand = Random.Range(2, (Rows * Columns - (Columns * row + column)) / testObjCount);
-                    }
+                    sortedRandNumbers.RemoveAt(0);
                 }
-                testObjRand--;
             }
         }
         if (Pillar != null) {
@@ -112,5 +110,17 @@ public class ModMazeSpawn : MonoBehaviour {
                 }
             }
         }
+    }
+
+    List<int> SortRandNum(int min, int max, int count) {
+        HashSet<int> uniqueNumbers = new HashSet<int>();
+
+        // Generate unique numbers
+        while (uniqueNumbers.Count < count) {
+            uniqueNumbers.Add(Random.Range(min, max + 1));
+        }
+
+        // Convert to list and sort
+        return uniqueNumbers.ToList().OrderBy(num => num).ToList();
     }
 }

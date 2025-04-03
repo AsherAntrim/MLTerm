@@ -375,8 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80772474b388794c89e28e2e4600ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardAmount: 1
-  diesOnCollision: 1
+  rewardSize: 1
 --- !u!1001 &1125039095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -391,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.01
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.y
