@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class RewardProvider : MonoBehaviour {
+    public string type = "Simple";
     public float rewardSize = 1;
     private float rewardAmount;
 
