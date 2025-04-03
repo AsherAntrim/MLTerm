@@ -1,15 +1,22 @@
 using UnityEngine;
 
 public class RewardProvider : MonoBehaviour {
-    public float rewardAmount = 1;
-    public bool diesOnCollision = true;
+    public float rewardSize = 1;
+    private float rewardAmount;
+
+    void Start() {
+        rewardAmount = rewardSize;
+    }
 
     void OnTriggerEnter(Collider other) {
         var agent = other.GetComponent<MazeAgent>();
         if (agent) {
             agent.SetReward(rewardAmount);
-            if (diesOnCollision) {
-                Destroy(this.gameObject);
+            if (rewardAmount > 0) {
+                rewardAmount = 0;
+            }
+            if (rewardAmount == 0) {
+                rewardAmount = -rewardSize;
             }
         }
     }
