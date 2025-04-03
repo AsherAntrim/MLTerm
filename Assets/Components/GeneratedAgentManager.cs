@@ -6,7 +6,7 @@ public class GeneratedAgentManager : AgentManager {
     public bool autoIncrementSeed;
 
     public override void OnEpisodeBegin() {
-        var maze = FindFirstObjectByType<MazeSpawner>();
+        var maze = FindFirstObjectByType<ModMazeSpawn>();
         // Remove current maze
         while (maze.transform.childCount > 0) {
             DestroyImmediate(maze.transform.GetChild(0).gameObject);
