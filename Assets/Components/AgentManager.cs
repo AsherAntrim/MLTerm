@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AgentManager : MonoBehaviour {
+public abstract class AgentManager : MonoBehaviour {
 
     public virtual void OnEpisodeBegin() { }
 
