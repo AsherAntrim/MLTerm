@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80772474b388794c89e28e2e4600ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
   rewardSize: 1
-  isDeadend: 1

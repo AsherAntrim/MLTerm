@@ -1,7 +1,13 @@
 using UnityEngine;
 
 public class RewardProvider : MonoBehaviour {
-    public string type = "Simple";
+    public enum RewardType {
+        Simple,
+        Complex,
+        ComplexCycle
+    }
+
+    public RewardType type = RewardType.Simple;
     public float rewardSize = 1;
     private float rewardAmount;
 
@@ -13,20 +19,20 @@ public class RewardProvider : MonoBehaviour {
         var agent = other.GetComponent<MazeAgent>();
         if (agent) {
             agent.SetReward(rewardAmount);
-            if (type == "Simple") {
-                Destroy(gameObject);
-            } else if (type == "Complex") {
-                if (rewardAmount > 0) {
-                    rewardAmount = 0;
-                } else if (rewardAmount == 0) {
-                    rewardAmount = -rewardSize;
-                }
-            } else if (type == "ComplexCycle") {
-                if (rewardAmount != 0) {
-                    rewardAmount = 0;
-                } else if (rewardAmount == 0) {
-                    rewardAmount = -rewardSize;
-                }
+            switch (type) {
+                case RewardType.Simple:
+                    Destroy(gameObject);
+                    break;
+                case RewardType.Complex:
+                    if (rewardAmount > 0) {
+                        rewardAmount = 0;
+                    } else if (rewardAmount == 0) {
+                        rewardAmount = -rewardSize;
+                    }
+                    break;
+                case RewardType.ComplexCycle:
+                    rewardAmount = rewardAmount == 0 ? 0 : -rewardSize;
+                    break;
             }
         }
     }
