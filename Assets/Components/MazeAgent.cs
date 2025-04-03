@@ -10,6 +10,8 @@ public class MazeAgent : Agent {
         rBody = GetComponent<Rigidbody>();
     }
 
+    public GameObject ViewCamera;
+
     public Transform[] transforms;
     public GameObject wall;
 
@@ -24,7 +26,23 @@ public class MazeAgent : Agent {
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
         var spawnPos = FindAnyObjectByType<AgentSpawner>();
-        transform.SetPositionAndRotation(spawnPos.transform.position + new Vector3(0, this.transform.localScale.y, 0), spawnPos.transform.rotation);
+        if (spawnPos) {
+            transform.SetPositionAndRotation(spawnPos.transform.position + new Vector3(0, this.transform.localScale.y, 0), spawnPos.transform.rotation);
+        }
+    }
+
+    void FixedUpdate() {
+        if (ViewCamera != null) {
+            Vector3 direction = (Vector3.up * 2 + Vector3.back) * 2;
+            RaycastHit hit;
+            Debug.DrawLine(transform.position, transform.position + direction, Color.red);
+            if (Physics.Linecast(transform.position, transform.position + direction, out hit)) {
+                ViewCamera.transform.position = hit.point;
+            } else {
+                ViewCamera.transform.position = transform.position + direction;
+            }
+            ViewCamera.transform.LookAt(transform.position);
+        }
     }
 
     public float forceMultiplier = 10;
