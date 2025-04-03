@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5491367044036559970}
   - component: {fileID: 334077000456941843}
   - component: {fileID: 6763386436439438215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RewardWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,5 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80772474b388794c89e28e2e4600ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardSize: 1
-  isDeadend: 0
+  rewardAmount: 1

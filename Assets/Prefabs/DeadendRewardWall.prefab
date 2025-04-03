@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5491367044036559970}
   - component: {fileID: 334077000456941843}
   - component: {fileID: 8105450951956633379}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DeadendRewardWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardAmount: 1
+  penaltyAmount:
+    useValue: 0
+    value: 0
   noOpMaterial: {fileID: 2100000, guid: 5de923b3ab157a649931a57d20352de6, type: 2}
   penaltyMaterial: {fileID: 2100000, guid: 9d6e8ba0ebd1c59489ddba5d0e6914e2, type: 2}
   cycles: 0

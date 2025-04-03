@@ -7,7 +7,7 @@ public class ComplexRewardProvider : SimpleRewardProvider {
         Penalty
     }
 
-    public float? penaltyAmount;
+    public OptionalFloat penaltyAmount;
 
     public Material noOpMaterial;
     public Material penaltyMaterial;
@@ -24,7 +24,7 @@ public class ComplexRewardProvider : SimpleRewardProvider {
         return state switch {
             State.Reward => base.ProvideReward(),
             State.NoOp => 0,
-            State.Penalty => penaltyAmount ?? -rewardAmount,
+            State.Penalty => penaltyAmount.useValue ? penaltyAmount.value : -rewardAmount,
             _ => throw new System.NotImplementedException()
         };
     }
