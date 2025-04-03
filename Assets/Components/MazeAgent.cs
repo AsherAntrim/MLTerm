@@ -12,16 +12,13 @@ public class MazeAgent : Agent {
 
     public GameObject ViewCamera;
 
-    public Transform[] transforms;
-    public GameObject wall;
-
     public override void OnEpisodeBegin() {
-        foreach (var t in transforms) {
-            var newWall = Instantiate(wall);
-            newWall.transform.position = t.position;
-            newWall.transform.rotation = t.rotation;
-            newWall.transform.localScale = t.localScale;
+        var maze = FindFirstObjectByType<MazeSpawner>();
+        // Remove current maze
+        while (maze.transform.childCount > 0) {
+            DestroyImmediate(maze.transform.GetChild(0).gameObject);
         }
+        maze.GenerateMaze();
 
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
