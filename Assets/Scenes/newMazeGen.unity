@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardSize: 1
+  isDeadend: 0
 --- !u!1001 &1125039095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.12
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.y
@@ -767,15 +768,16 @@ MonoBehaviour:
   FullRandom: 1
   RandomSeed: 12345
   Floor: {fileID: 165842, guid: 8d3b36f175a633f429d7bda54c76550d, type: 3}
-  Wall: {fileID: 144206, guid: 9de82ec743bb24449a99f5cf1e325d61, type: 3}
-  Pillar: {fileID: 142476, guid: f3f97a2401feba4479a301d6181e9da6, type: 3}
+  Wall: {fileID: 5918584185767178956, guid: 2a84f7e4db633fc4fb20023ff6bad5ca, type: 3}
+  Pillar: {fileID: 0}
   Rows: 8
   Columns: 8
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
   NumOfTestObjects: 1
-  GoalPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
+  GoalPrefab: {fileID: 0}
+  RewardWall: {fileID: 6436644473543009068, guid: 1a0f293c433f5494b90864fa754a9a47, type: 3}
   TestObjPrefab: {fileID: 4709852248610417087, guid: 82bbd5fac54dd834ea9defda89e217e9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

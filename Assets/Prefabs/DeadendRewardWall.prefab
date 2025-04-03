@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 334077000456941843}
   - component: {fileID: 6763386436439438215}
   m_Layer: 0
-  m_Name: RewardWall
+  m_Name: DeadendRewardWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardSize: 1
-  isDeadend: 0
+  isDeadend: 1

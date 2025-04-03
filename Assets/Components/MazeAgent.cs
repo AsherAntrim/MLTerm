@@ -5,20 +5,18 @@ using UnityEngine;
 
 public class MazeAgent : Agent {
 
+    public GameObject ViewCamera;
+    public AgentManager agentManager;
+
     Rigidbody rBody;
     void Start() {
         rBody = GetComponent<Rigidbody>();
     }
 
-    public GameObject ViewCamera;
-
     public override void OnEpisodeBegin() {
-        var maze = FindFirstObjectByType<MazeSpawner>();
-        // Remove current maze
-        while (maze.transform.childCount > 0) {
-            DestroyImmediate(maze.transform.GetChild(0).gameObject);
+        if (agentManager) {
+            agentManager.OnEpisodeBegin();
         }
-        maze.GenerateMaze(); // TODO: Update the seed. seed+1?
 
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
