@@ -6,12 +6,11 @@ using System.Collections;
 //</summary>
 public class OldestTreeMazeGenerator : TreeMazeGenerator {
 
-	public OldestTreeMazeGenerator(int row, int column):base(row,column){
-		
+	public OldestTreeMazeGenerator(int row, int column) : base(row, column) {
+
 	}
-	
-	protected override int GetCellInRange(int max)
-	{
+
+	protected override int GetCellInRange(int max) {
 		return 0;
 	}
 }

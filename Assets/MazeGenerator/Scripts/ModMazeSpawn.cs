@@ -59,7 +59,7 @@ public class ModMazeSpawn : MonoBehaviour {
         }
         mMazeGenerator.GenerateMaze();
         if (NumOfTestObjects > 0) {
-            testObjRand = Random.Range(1, (Rows * Columns) / NumOfTestObjects);
+            testObjRand = Random.Range(1, Rows * Columns / NumOfTestObjects);
             testObjCount = NumOfTestObjects;
         }
 
@@ -69,30 +69,30 @@ public class ModMazeSpawn : MonoBehaviour {
                 float z = row * (CellHeight + (AddGaps ? .2f : 0));
                 MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
                 GameObject tmp;
-                tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0));
                 tmp.transform.parent = transform;
                 if (cell.WallRight) {
-                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
+                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0));// right
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallFront) {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0));// front
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallLeft) {
-                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
+                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0));// left
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallBack) {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));// back
                     tmp.transform.parent = transform;
                 }
                 if (cell.IsGoal && GoalPrefab != null) {
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
                 }
                 if (testObjRand == 1 && TestObjPrefab != null) {//cell.IsTestObj
-                    tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
                     testObjCount--;
                     if (testObjCount > 0) {

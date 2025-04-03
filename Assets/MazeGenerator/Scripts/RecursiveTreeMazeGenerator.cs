@@ -6,13 +6,12 @@ using System.Collections;
 //Result equal to Recursive algorithm, so TreeMazeGenerator becomes non-recursive realisation of RecursiveGenerator = )
 //</summary>
 public class RecursiveTreeMazeGenerator : TreeMazeGenerator {
-	
-	public RecursiveTreeMazeGenerator(int row, int column):base(row,column){
-		
+
+	public RecursiveTreeMazeGenerator(int row, int column) : base(row, column) {
+
 	}
-	
-	protected override int GetCellInRange(int max)
-	{
+
+	protected override int GetCellInRange(int max) {
 		return max;
 	}
 }
