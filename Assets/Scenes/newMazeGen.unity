@@ -775,7 +775,7 @@ MonoBehaviour:
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
-  UseTestObject: 1
+  NumOfTestObjects: 1
   GoalPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
   TestObjPrefab: {fileID: 4709852248610417087, guid: 82bbd5fac54dd834ea9defda89e217e9, type: 3}
 --- !u!1660057539 &9223372036854775807

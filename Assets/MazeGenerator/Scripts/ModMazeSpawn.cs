@@ -24,13 +24,15 @@ public class ModMazeSpawn : MonoBehaviour {
 	public float CellWidth = 5;
 	public float CellHeight = 5;
 	public bool AddGaps = true;
-	public bool UseTestObject = true;
+	public int NumOfTestObjects = 1;
 	public GameObject GoalPrefab = null;
 	public GameObject TestObjPrefab = null;
 
 	private BasicMazeGenerator mMazeGenerator = null;
+	private int testObjRand = 0;
+	private int testObjCount = 1;
 
-	void Start() {
+    void Start() {
 		GenerateMaze();
 	}
 
@@ -56,8 +58,11 @@ public class ModMazeSpawn : MonoBehaviour {
 				break;
 		}
         mMazeGenerator.GenerateMaze();
+		if (NumOfTestObjects > 0) {
+            testObjRand = Random.Range(1, (Rows * Columns) / NumOfTestObjects);
+			testObjCount = NumOfTestObjects;
+        }
 
-		int testObjCount = Random.Range(0, Rows * Columns + 1);
 		for (int row = 0; row < Rows; row++) {
 			for (int column = 0; column < Columns; column++) {
 				float x = column * (CellWidth + (AddGaps ? .2f : 0));
@@ -86,11 +91,15 @@ public class ModMazeSpawn : MonoBehaviour {
 					tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
 					tmp.transform.parent = transform;
 				}
-				if (testObjCount == 0 && TestObjPrefab != null) {//cell.IsTestObj
+				if (testObjRand == 1 && TestObjPrefab != null) {//cell.IsTestObj
                     tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;
+					testObjCount--;
+					if( testObjCount > 0 ) {
+						testObjRand = Random.Range(2, (Rows * Columns - (Columns * row + column)) / testObjCount);
+					}
                 }
-				testObjCount--;
+                testObjRand--;
 			}
 		}
 		if (Pillar != null) {
