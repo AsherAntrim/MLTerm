@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3270799791801342078}
   - component: {fileID: 5491367044036559970}
   - component: {fileID: 334077000456941843}
-  - component: {fileID: 6763386436439438215}
+  - component: {fileID: 8105450951956633379}
   m_Layer: 0
   m_Name: DeadendRewardWall
   m_TagString: Untagged
@@ -109,7 +109,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6763386436439438215
+--- !u!114 &8105450951956633379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,8 +118,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6436644473543009068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f80772474b388794c89e28e2e4600ea7, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d109223bf4e6a14aa2aec15fa80f619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  rewardSize: 1
+  rewardAmount: 1
+  noOpMaterial: {fileID: 2100000, guid: 5de923b3ab157a649931a57d20352de6, type: 2}
+  penaltyMaterial: {fileID: 2100000, guid: 9d6e8ba0ebd1c59489ddba5d0e6914e2, type: 2}
+  cycles: 0
