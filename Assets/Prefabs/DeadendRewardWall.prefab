@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d109223bf4e6a14aa2aec15fa80f619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardAmount: 1
+  rewardAmount: 0.01
   penaltyAmount:
     useValue: 0
     value: 0

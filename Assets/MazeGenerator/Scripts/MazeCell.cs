@@ -18,4 +18,8 @@ public class MazeCell {
 	public bool WallLeft = false;
 	public bool WallBack = false;
 	public bool IsGoal = false;
+	public bool RewardRight = false;
+	public bool RewardFront = false;
+	public bool RewardLeft = false;
+	public bool RewardBack = false;
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.MLAgents;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -26,16 +27,13 @@ public class ModMazeSpawn : MonoBehaviour {
     public float CellWidth = 5;
     public float CellHeight = 5;
     public bool AddGaps = true;
-    public int NumOfTestObjects = 1;
-    public GameObject GoalPrefab = null;
-    public GameObject TestObjPrefab = null;
+    public int NumRandPositions = 1;
+    public GameObject Goal = null;
+    public GameObject RewardWall;
+    public GameObject Spawn = null;
 
     private BasicMazeGenerator mMazeGenerator = null;
     private List<int> sortedRandNumbers = new List<int>();
-
-    void Start() {
-        GenerateMaze();
-    }
 
     public void GenerateMaze() {
         if (!FullRandom) {
@@ -59,11 +57,13 @@ public class ModMazeSpawn : MonoBehaviour {
                 break;
         }
         mMazeGenerator.GenerateMaze();
-        if (NumOfTestObjects > 0) {
-            sortedRandNumbers = SortRandNum(1, Rows * Columns, NumOfTestObjects);
-            //testObjRand = Random.Range(1, Rows * Columns / NumOfTestObjects);
-            //testObjCount = NumOfTestObjects;
+        if (NumRandPositions > 0) {
+            sortedRandNumbers = SortRandNum(1, Rows * Columns, NumRandPositions);
         }
+
+        bool goalGenerated = false;
+        int spawnPos = sortedRandNumbers[0]; // not super random, but should be fine. just grabbing the first position every time which will be sorted to be near begin.
+        sortedRandNumbers.RemoveAt(0);
 
         for (int row = 0; row < Rows; row++) {
             for (int column = 0; column < Columns; column++) {
@@ -71,8 +71,10 @@ public class ModMazeSpawn : MonoBehaviour {
                 float z = row * (CellHeight + (AddGaps ? .2f : 0));
                 MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
                 GameObject tmp;
-                tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0));
-                tmp.transform.parent = transform;
+                if (Floor) {
+                    tmp = Instantiate(Floor, new Vector3(x, 0, z), Quaternion.Euler(0, 0, 0));
+                    tmp.transform.parent = transform;
+                }
                 if (cell.WallRight) {
                     tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0));// right
                     tmp.transform.parent = transform;
@@ -89,15 +91,39 @@ public class ModMazeSpawn : MonoBehaviour {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));// back
                     tmp.transform.parent = transform;
                 }
-                if (cell.IsGoal && GoalPrefab != null) {
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                if (cell.IsGoal && !goalGenerated && Goal != null) {
+                    tmp = Instantiate(Goal, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                    tmp.transform.parent = transform;
+                    goalGenerated = true;
+                }
+
+                if (cell.RewardRight) {
+                    tmp = Instantiate(RewardWall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0));
                     tmp.transform.parent = transform;
                 }
-                if (sortedRandNumbers.Count > 0 && sortedRandNumbers[0] == (row * Columns + column) && TestObjPrefab != null) {
-                    tmp = Instantiate(TestObjPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                if (cell.RewardFront) {
+                    tmp = Instantiate(RewardWall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0));
                     tmp.transform.parent = transform;
-                    sortedRandNumbers.RemoveAt(0);
                 }
+                if (cell.RewardLeft) {
+                    tmp = Instantiate(RewardWall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0));
+                    tmp.transform.parent = transform;
+                }
+                if (cell.RewardBack) {
+                    tmp = Instantiate(RewardWall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));
+                    tmp.transform.parent = transform;
+                }
+
+                if ((row * Columns + column) == spawnPos && Spawn != null) {
+                    tmp = Instantiate(Spawn, new Vector3(x, 0.1f, z), Quaternion.Euler(0, 0, 0));
+                    tmp.transform.parent = transform;
+                }
+
+                // if (sortedRandNumbers.Count > 0 && sortedRandNumbers[0] == (row * Columns + column) && Spawn != null) {
+                //     tmp = Instantiate(Spawn, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                //     tmp.transform.parent = transform;
+                //     sortedRandNumbers.RemoveAt(0);
+                // }
             }
         }
         if (Pillar != null) {
