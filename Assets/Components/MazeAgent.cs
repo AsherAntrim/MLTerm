@@ -18,7 +18,7 @@ public class MazeAgent : Agent {
         while (maze.transform.childCount > 0) {
             DestroyImmediate(maze.transform.GetChild(0).gameObject);
         }
-        maze.GenerateMaze();
+        maze.GenerateMaze(); // TODO: Update the seed. seed+1?
 
         rBody.angularVelocity = Vector3.zero;
         rBody.linearVelocity = Vector3.zero;
