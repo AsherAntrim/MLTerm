@@ -1,6 +1,7 @@
 using UnityEngine;
 
 public class SimpleRewardProvider : MonoBehaviour {
+	public bool doesDie = true;
     public float rewardAmount = 1;
 
     void OnTriggerEnter(Collider other) {
@@ -16,6 +17,8 @@ public class SimpleRewardProvider : MonoBehaviour {
     }
 
     public virtual void PostReward() {
-        Destroy(gameObject);
+		if (doesDie) {
+			Destroy(gameObject);
+		}
     }
 }

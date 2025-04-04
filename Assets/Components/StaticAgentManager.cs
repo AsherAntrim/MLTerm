@@ -11,12 +11,12 @@ public class StaticAgentManager : AgentManager {
     }
 
     public override void OnEpisodeBegin() {
-        while (rewardWallsParent.transform.childCount > 0) {
-            DestroyImmediate(rewardWallsParent.transform.GetChild(0).gameObject);
+        foreach (Transform t in rewardWallsParent.transform) {
+            Destroy(t.gameObject);
         }
 
         foreach (var t in templates) {
-            Instantiate(t, t.transform.position, t.transform.rotation, rewardWallsParent.transform);
+            Instantiate(t.rewardWall, t.transform.position, t.transform.rotation, rewardWallsParent.transform);
         }
     }
 }
