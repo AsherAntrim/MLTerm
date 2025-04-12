@@ -573,6 +573,10 @@ PrefabInstance:
       propertyPath: FullRandom
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
+      propertyPath: UseProgression
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5824161822699591662, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.564232

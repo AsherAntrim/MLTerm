@@ -23,23 +23,31 @@ public class ProgressionAgentManager : AgentManager {
     public MixStrategy strategy;
 
     private int index = 0;
+    private int r = 0;
+    private int c = 0;
+    private bool first = true;
 
     public override void OnEpisodeBegin() {
         var episode = Academy.Instance.EpisodeCount;
 
-        Debug.Log("Rows: " + mazeGenerator.Rows);
-        Debug.Log("Columns: " + mazeGenerator.Columns);
-        Debug.Log("EpisodeNum: " + episode);
-        if (episode == 1) {
-            mazeGenerator.Rows = 2;
-            mazeGenerator.Columns = 2;
-            Debug.Log("Rows: " + mazeGenerator.Rows);
-            Debug.Log("Columns: " + mazeGenerator.Columns);
-        } else {
-            mazeGenerator.Rows = 3;
-            mazeGenerator.Columns = 3;
-            Debug.Log("Rows: " + mazeGenerator.Rows);
-            Debug.Log("Columns: " + mazeGenerator.Columns);
+        if (mazeGenerator.UseProgression) {
+            if (first) {
+                if (mazeGenerator.Rows >= mazeGenerator.StartRows && mazeGenerator.Columns >= mazeGenerator.StartColumns) {
+                    r = mazeGenerator.Rows;
+                    c = mazeGenerator.Columns;
+                    mazeGenerator.Rows = mazeGenerator.StartRows;
+                    mazeGenerator.Columns = mazeGenerator.StartColumns;
+                }
+                first = false;
+            } else {
+                if (mazeGenerator.Rows < r) {
+                    mazeGenerator.Rows++;
+                }
+                if (mazeGenerator.Columns < c) {
+                    mazeGenerator.Columns++;
+                }
+                
+            }
         }
         
         // Remove current maze
