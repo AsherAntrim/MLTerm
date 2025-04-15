@@ -25,29 +25,32 @@ public class ProgressionAgentManager : AgentManager {
     private int index = 0;
     private int r = 0;
     private int c = 0;
-    private bool first = true;
+    private int progIndex = 0;
+    private int episodeSpace = 0;
 
     public override void OnEpisodeBegin() {
         var episode = Academy.Instance.EpisodeCount;
 
         if (mazeGenerator.UseProgression) {
-            if (first) {
+            if (progIndex == 0) {
                 if (mazeGenerator.Rows >= mazeGenerator.StartRows && mazeGenerator.Columns >= mazeGenerator.StartColumns) {
                     r = mazeGenerator.Rows;
                     c = mazeGenerator.Columns;
                     mazeGenerator.Rows = mazeGenerator.StartRows;
                     mazeGenerator.Columns = mazeGenerator.StartColumns;
                 }
-                first = false;
-            } else {
-                if (mazeGenerator.Rows < r) {
-                    mazeGenerator.Rows++;
-                }
-                if (mazeGenerator.Columns < c) {
-                    mazeGenerator.Columns++;
-                }
-                
+                episodeSpace = -1;
+            } else if (episodeSpace >= mazeGenerator.EpisodesBetweenIncrements) {
+                if (mazeGenerator.Rows + mazeGenerator.IncrementInt <= r) {
+                    mazeGenerator.Rows += mazeGenerator.IncrementInt;
+                } else { mazeGenerator.Rows = r; }
+                if (mazeGenerator.Columns + mazeGenerator.IncrementInt <= c) {
+                    mazeGenerator.Columns += mazeGenerator.IncrementInt;
+                } else { mazeGenerator.Columns = c; }
+                episodeSpace = -1;
             }
+            progIndex++;
+            episodeSpace++;
         }
         
         // Remove current maze

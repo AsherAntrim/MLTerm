@@ -34,6 +34,8 @@ public class ModMazeSpawn : MonoBehaviour {
     public bool UseProgression = false;
     public int StartRows = 2;
     public int StartColumns = 2;
+    public int IncrementInt = 1;
+    public int EpisodesBetweenIncrements = 0;
 
     private BasicMazeGenerator mMazeGenerator = null;
     private List<int> sortedRandNumbers = new List<int>();
