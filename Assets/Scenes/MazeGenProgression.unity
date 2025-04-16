@@ -254,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 2147204224}
     - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,11 +571,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: FullRandom
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
+      propertyPath: RewardWall
+      value: 
+      objectReference: {fileID: 6436644473543009068, guid: b3385587e93afd7488bab5d5ed619d56, type: 3}
+    - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: IncrementInt
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: UseProgression
@@ -583,7 +587,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: EpisodesBetweenIncrements
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5824161822699591662, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: m_LocalPosition.x
