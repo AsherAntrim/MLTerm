@@ -74,6 +74,7 @@ public class ModMazeSpawn : MonoBehaviour {
             for (int column = 0; column < Columns; column++) {
                 float x = column * (CellWidth + (AddGaps ? .2f : 0));
                 float z = row * (CellHeight + (AddGaps ? .2f : 0));
+                float rot = 0;
                 MazeCell cell = mMazeGenerator.GetMazeCell(row, column);
                 GameObject tmp;
                 if (Floor) {
@@ -81,23 +82,30 @@ public class ModMazeSpawn : MonoBehaviour {
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallRight) {
-                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0));// right
+                    rot = 90;
+                    tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, rot, 0));// right
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallFront) {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0));// front
+                    rot = 0;
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, rot, 0));// front
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallLeft) {
-                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0));// left
+                    rot = 270;
+                    tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, rot, 0));// left
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallBack) {
-                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0));// back
+                    rot = 180;
+                    tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, rot, 0));// back
                     tmp.transform.parent = transform;
                 }
                 if (cell.IsGoal && !goalGenerated && Goal != null) {
-                    tmp = Instantiate(Goal, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0));
+                    if (cell.WallFront) {
+                        rot += 90;
+                    }
+                    tmp = Instantiate(Goal, new Vector3(x, 1, z), Quaternion.Euler(0, rot, 0));
                     tmp.transform.parent = transform;
                     goalGenerated = true;
                 }
