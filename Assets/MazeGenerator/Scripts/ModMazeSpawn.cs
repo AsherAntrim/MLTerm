@@ -105,7 +105,7 @@ public class ModMazeSpawn : MonoBehaviour {
                     if (cell.WallFront) {
                         rot += 90;
                     }
-                    tmp = Instantiate(Goal, new Vector3(x, 1, z), Quaternion.Euler(0, rot, 0));
+                    tmp = Instantiate(Goal, new Vector3(x, 0, z), Quaternion.Euler(0, rot, 0));
                     tmp.transform.parent = transform;
                     goalGenerated = true;
                 }
