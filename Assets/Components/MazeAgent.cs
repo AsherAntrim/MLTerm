@@ -25,14 +25,17 @@ public class MazeAgent : Agent {
         var spawnPos = FindAnyObjectByType<AgentSpawner>();
         if (spawnPos) {
             transform.SetPositionAndRotation(
-                spawnPos.transform.position + new Vector3(0, this.transform.localScale.y, 0),
+                spawnPos.transform.position + new Vector3(0, transform.localScale.y, 0),
                 Quaternion.Euler(spawnPos.transform.rotation.eulerAngles + new Vector3(0, Random.Range(0, 360), 0)));
         }
     }
 
     public float forceMultiplier = 10;
     public float rotationMultiplier = 10;
-	private int stepCount;
+    [Tooltip("The number of steps the agent can take before ending the episode automatically.")]
+    public int resetStepCount = 6000;
+    int seenGoalTimes;
+    private int stepCount;
 
     float lastDistance;
     public override void OnActionReceived(ActionBuffers actionBuffers) {
@@ -55,36 +58,47 @@ public class MazeAgent : Agent {
         }
 
         var goal = GameObject.FindGameObjectWithTag("Finish");
-        if (Vector3.Distance(transform.position, goal.transform.position) < lastDistance) {
+        var distToGoal = Vector3.Distance(transform.position, goal.transform.position);
+        if (distToGoal < lastDistance) {
             AddReward(0.01f);
         } else {
             AddReward(-0.01f);
         }
 
-        if (Academy.Instance.StepCount > stepCount+6000) {
-			stepCount += 6000;
-            SetReward(-1);
+        var rayPerceptor = GetComponent<RayPerceptionSensorComponent3D>();
+        var outputs = rayPerceptor.RaySensor.RayPerceptionOutput.RayOutputs;
+        foreach (var output in outputs) {
+            if (output.HitTaggedObject && output.HitTagIndex == 1) { // 0 is wall, 1 is finish, 2 is rward
+                seenGoalTimes++;
+                AddReward(0.01f / seenGoalTimes);
+                break;
+            }
+        }
+
+        if (Academy.Instance.StepCount > stepCount + resetStepCount) {
+            stepCount += resetStepCount;
+            // SetReward(-1);
             EndEpisode();
         }
     }
-	
-	void OnCollisionEnter(Collision col) {
-		if (col.gameObject.CompareTag("Wall")) {
-			AddReward(-0.1f);
-		}
-	}
-	
-	void OnCollisionStay(Collision col) {
-		if (col.gameObject.CompareTag("Wall")) {
-			AddReward(-0.01f);
-		}
-	}
-	
-	void OnCollisionExit(Collision col) {
-		if (col.gameObject.CompareTag("Wall")) {
-			AddReward(0.1f);
-		}
-	}
+
+    void OnCollisionEnter(Collision col) {
+        if (col.gameObject.CompareTag("Wall")) {
+            AddReward(-0.1f);
+        }
+    }
+
+    void OnCollisionStay(Collision col) {
+        if (col.gameObject.CompareTag("Wall")) {
+            AddReward(-0.01f);
+        }
+    }
+
+    void OnCollisionExit(Collision col) {
+        if (col.gameObject.CompareTag("Wall")) {
+            AddReward(0.1f);
+        }
+    }
 
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(transform.position);
@@ -95,6 +109,5 @@ public class MazeAgent : Agent {
 
         _[0] = Input.GetAxis("Horizontal");
         _[1] = Input.GetAxis("Vertical");
-
     }
 }
