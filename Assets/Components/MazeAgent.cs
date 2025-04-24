@@ -1,3 +1,4 @@
+using System;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -16,6 +17,7 @@ public class MazeAgent : Agent {
     }
 
     public override void OnEpisodeBegin() {
+        seenGoalTimes = 0;
         if (agentManager) {
             agentManager.OnEpisodeBegin();
         }
@@ -24,9 +26,9 @@ public class MazeAgent : Agent {
         rBody.linearVelocity = Vector3.zero;
         var spawnPos = FindAnyObjectByType<AgentSpawner>();
         if (spawnPos) {
-            transform.SetPositionAndRotation(
-                spawnPos.transform.position + new Vector3(0, transform.localScale.y, 0),
-                Quaternion.Euler(spawnPos.transform.rotation.eulerAngles + new Vector3(0, Random.Range(0, 360), 0)));
+            UnityEngine.Random.InitState(Academy.Instance.EpisodeCount);
+            transform.position = spawnPos.transform.position + new Vector3(0, transform.localScale.y, 0);
+            transform.Rotate(Vector3.up, UnityEngine.Random.Range(0, 360));
         }
     }
 
@@ -35,7 +37,6 @@ public class MazeAgent : Agent {
     [Tooltip("The number of steps the agent can take before ending the episode automatically.")]
     public int resetStepCount = 6000;
     int seenGoalTimes;
-    private int stepCount;
 
     float lastDistance;
     public override void OnActionReceived(ActionBuffers actionBuffers) {
@@ -53,55 +54,46 @@ public class MazeAgent : Agent {
             moveToggle = !moveToggle;
         } else {
             transform.Rotate(Vector3.up, actionBuffers.ContinuousActions[0] * rotationMultiplier);
-            Vector3 forward = transform.forward * actionBuffers.ContinuousActions[1];
+            Vector3 forward = transform.forward * Math.Abs(actionBuffers.ContinuousActions[1]);
             rBody.AddForce(forward * forceMultiplier);
         }
 
-        var goal = GameObject.FindGameObjectWithTag("Finish");
-        var distToGoal = Vector3.Distance(transform.position, goal.transform.position);
-        if (distToGoal < lastDistance) {
-            AddReward(0.01f);
-        } else {
-            AddReward(-0.01f);
-        }
+        // var distToGoal = Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Finish").transform.position);
+        // if (distToGoal < lastDistance) {
+        //     AddReward(0.0001f);
+        // } else {
+        //     AddReward(-0.0001f);
+        // }
 
-        var rayPerceptor = GetComponent<RayPerceptionSensorComponent3D>();
-        var outputs = rayPerceptor.RaySensor.RayPerceptionOutput.RayOutputs;
-        foreach (var output in outputs) {
-            if (output.HitTaggedObject && output.HitTagIndex == 1) { // 0 is wall, 1 is finish, 2 is rward
-                seenGoalTimes++;
-                AddReward(0.01f / seenGoalTimes);
-                break;
-            }
-        }
+        // var rayPerceptor = GetComponent<RayPerceptionSensorComponent3D>();
+        // var outputs = rayPerceptor.RaySensor.RayPerceptionOutput.RayOutputs;
+        // if (outputs is not null) {
+        //     foreach (var output in outputs) {
+        //         if (output.HitTaggedObject && output.HitTagIndex == 1) { // 0 is wall, 1 is finish, 2 is rward
+        //             seenGoalTimes++;
+        //             AddReward(0.01f / seenGoalTimes);
+        //         }
+        //     }
+        // }
 
-        if (Academy.Instance.StepCount > stepCount + resetStepCount) {
-            stepCount += resetStepCount;
-            // SetReward(-1);
-            EndEpisode();
-        }
+        AddReward(-0.001f);
     }
 
-    void OnCollisionEnter(Collision col) {
-        if (col.gameObject.CompareTag("Wall")) {
-            AddReward(-0.1f);
-        }
-    }
+    // void OnCollisionEnter(Collision col) {
+    //     if (col.gameObject.CompareTag("Wall")) {
+    //         AddReward(-0.1f);
+    //     }
+    // }
 
-    void OnCollisionStay(Collision col) {
-        if (col.gameObject.CompareTag("Wall")) {
-            AddReward(-0.01f);
-        }
-    }
-
-    void OnCollisionExit(Collision col) {
-        if (col.gameObject.CompareTag("Wall")) {
-            AddReward(0.1f);
-        }
-    }
+    // void OnCollisionStay(Collision col) {
+    //     if (col.gameObject.CompareTag("Wall")) {
+    //         AddReward(-0.1f);
+    //     }
+    // }
 
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(transform.position);
+        // sensor.AddObservation(GameObject.FindGameObjectWithTag("Finish").transform.position);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut) {

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doesDie: 1
-  rewardAmount: 10
+  rewardAmount: 1
 --- !u!114 &194969385857295218
 MonoBehaviour:
   m_ObjectHideFlags: 0
