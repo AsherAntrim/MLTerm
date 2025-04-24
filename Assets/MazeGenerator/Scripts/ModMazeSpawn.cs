@@ -29,6 +29,11 @@ public class ModMazeSpawn : MonoBehaviour {
     public GameObject Goal = null;
     public GameObject RewardWall;
     public GameObject Spawn = null;
+	public bool UseProgression;
+	public int IncrementInt;
+	public int StartColumns;
+	public int StartRows;
+	public int EpisodesBetweenIncrements;
 
     private BasicMazeGenerator mMazeGenerator = null;
     private List<int> sortedRandNumbers = new List<int>();

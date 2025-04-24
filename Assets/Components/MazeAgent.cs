@@ -32,6 +32,7 @@ public class MazeAgent : Agent {
 
     public float forceMultiplier = 10;
     public float rotationMultiplier = 10;
+	private int stepCount;
 
     float lastDistance;
     public override void OnActionReceived(ActionBuffers actionBuffers) {
@@ -53,18 +54,37 @@ public class MazeAgent : Agent {
             rBody.AddForce(forward * forceMultiplier);
         }
 
-        var goal = GameObject.FindGameObjectWithTag("Goal");
+        var goal = GameObject.FindGameObjectWithTag("Finish");
         if (Vector3.Distance(transform.position, goal.transform.position) < lastDistance) {
             AddReward(0.01f);
         } else {
             AddReward(-0.01f);
         }
 
-        if (Academy.Instance.StepCount > 6000) {
+        if (Academy.Instance.StepCount > stepCount+6000) {
+			stepCount += 6000;
             SetReward(-1);
             EndEpisode();
         }
     }
+	
+	void OnCollisionEnter(Collision col) {
+		if (col.gameObject.CompareTag("Wall")) {
+			AddReward(-0.1f);
+		}
+	}
+	
+	void OnCollisionStay(Collision col) {
+		if (col.gameObject.CompareTag("Wall")) {
+			AddReward(-0.01f);
+		}
+	}
+	
+	void OnCollisionExit(Collision col) {
+		if (col.gameObject.CompareTag("Wall")) {
+			AddReward(0.1f);
+		}
+	}
 
     public override void CollectObservations(VectorSensor sensor) {
         sensor.AddObservation(transform.position);
