@@ -1,1 +1,88 @@
-{"count":1,"self":32.952799999999996,"total":55.66074,"children":{"InitializeActuators":{"count":1,"self":0.0009969,"total":0.0009969,"children":null},"InitializeSensors":{"count":1,"self":0.0019949,"total":0.0019949,"children":null},"AgentSendState":{"count":28817,"self":0.2783114,"total":0.3679653,"children":{"CollectObservations":{"count":5764,"self":0.0069758999999999993,"total":0.0069758999999999993,"children":null},"WriteActionMask":{"count":5764,"self":0.0039883,"total":0.0039883,"children":null},"RequestDecision":{"count":5764,"self":0.0149786,"total":0.0786897,"children":{"AgentInfo.ToProto":{"count":5764,"self":0.0118503,"total":0.063711099999999993,"children":{"GenerateSensorData":{"count":5764,"self":0.043889,"total":0.0518608,"children":{"RayPerceptionSensor.Perceive":{"count":5764,"self":0.0079718,"total":0.0079718,"children":null}}}}}}}}},"DecideAction":{"count":28817,"self":22.2737056,"total":22.2737057,"children":null},"AgentAct":{"count":28817,"self":0.0622803,"total":0.0622803,"children":null}},"gauges":{},"metadata":{"timer_format_version":"0.1.0","start_time_seconds":"1745474401","unity_version":"6000.0.42f1","command_line_arguments":"C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.42f1\\Editor\\Unity.exe -projectpath C:\\Users\\Kenneth\\Unity\\ML Final Project\\MLTerm -useHub -hubIPC -cloudEnvironment production","communication_protocol_version":"1.5.0","com.unity.ml-agents_version":"3.0.0","scene_name":"MazeGenProgression","end_time_seconds":"1745474457"}}
+{
+    "count": 1,
+    "self": 32.952799999999996,
+    "total": 55.66074,
+    "children": {
+        "InitializeActuators": {
+            "count": 1,
+            "self": 0.0009969,
+            "total": 0.0009969,
+            "children": null
+        },
+        "InitializeSensors": {
+            "count": 1,
+            "self": 0.0019949,
+            "total": 0.0019949,
+            "children": null
+        },
+        "AgentSendState": {
+            "count": 28817,
+            "self": 0.2783114,
+            "total": 0.3679653,
+            "children": {
+                "CollectObservations": {
+                    "count": 5764,
+                    "self": 0.0069758999999999993,
+                    "total": 0.0069758999999999993,
+                    "children": null
+                },
+                "WriteActionMask": {
+                    "count": 5764,
+                    "self": 0.0039883,
+                    "total": 0.0039883,
+                    "children": null
+                },
+                "RequestDecision": {
+                    "count": 5764,
+                    "self": 0.0149786,
+                    "total": 0.0786897,
+                    "children": {
+                        "AgentInfo.ToProto": {
+                            "count": 5764,
+                            "self": 0.0118503,
+                            "total": 0.063711099999999993,
+                            "children": {
+                                "GenerateSensorData": {
+                                    "count": 5764,
+                                    "self": 0.043889,
+                                    "total": 0.0518608,
+                                    "children": {
+                                        "RayPerceptionSensor.Perceive": {
+                                            "count": 5764,
+                                            "self": 0.0079718,
+                                            "total": 0.0079718,
+                                            "children": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "DecideAction": {
+            "count": 28817,
+            "self": 22.2737056,
+            "total": 22.2737057,
+            "children": null
+        },
+        "AgentAct": {
+            "count": 28817,
+            "self": 0.0622803,
+            "total": 0.0622803,
+            "children": null
+        }
+    },
+    "gauges": {},
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1745474401",
+        "unity_version": "6000.0.42f1",
+        "command_line_arguments": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.42f1\\Editor\\Unity.exe -projectpath C:\\Users\\Kenneth\\Unity\\ML Final Project\\MLTerm -useHub -hubIPC -cloudEnvironment production",
+        "communication_protocol_version": "1.5.0",
+        "com.unity.ml-agents_version": "3.0.0",
+        "scene_name": "MazeGenProgression",
+        "end_time_seconds": "1745474457"
+    }
+}
