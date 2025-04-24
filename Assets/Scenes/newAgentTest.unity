@@ -572,7 +572,7 @@ PrefabInstance:
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: RewardWall
       value: 
-      objectReference: {fileID: 6436644473543009068, guid: b3385587e93afd7488bab5d5ed619d56, type: 3}
+      objectReference: {fileID: 6436644473543009068, guid: 1a0f293c433f5494b90864fa754a9a47, type: 3}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: IncrementInt
       value: 1

@@ -186,6 +186,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   agentManager: {fileID: 0}
+  alterMove: 0
   forceMultiplier: 20
   rotationMultiplier: 5
 --- !u!54 &2647913614258727300

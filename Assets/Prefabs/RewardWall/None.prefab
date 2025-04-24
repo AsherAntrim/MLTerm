@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5491367044036559970}
   - component: {fileID: 334077000456941843}
   - component: {fileID: 6763386436439438215}
-  m_Layer: 0
-  m_Name: Simple
-  m_TagString: rward
+  m_Layer: 2
+  m_Name: None
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,4 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doesDie: 1
-  rewardAmount: 0.01
+  rewardAmount: 0

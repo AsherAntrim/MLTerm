@@ -252,9 +252,33 @@ PrefabInstance:
       propertyPath: agentManager
       value: 
       objectReference: {fileID: 2147204224}
+    - target: {fileID: 6149524957905549860, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6149524957905549860, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: 'm_DetectableTags.Array.data[2]'
+      value: rward
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_BehaviorType
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808565877277446029, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6843651607886182024, guid: d297e0593b8d3534880e2304bec19a04, type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,16 +594,24 @@ PrefabInstance:
       value: Maze
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
+      propertyPath: StartRows
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: FullRandom
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: RewardWall
       value: 
-      objectReference: {fileID: 6436644473543009068, guid: b3385587e93afd7488bab5d5ed619d56, type: 3}
+      objectReference: {fileID: 6436644473543009068, guid: 1a0f293c433f5494b90864fa754a9a47, type: 3}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: IncrementInt
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
+      propertyPath: StartColumns
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5469023840325347159, guid: 3a2ed4db68e000f41ac41dd8183d028b, type: 3}
       propertyPath: UseProgression
