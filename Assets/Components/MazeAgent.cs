@@ -76,7 +76,7 @@ public class MazeAgent : Agent {
         //     }
         // }
 
-        AddReward(-0.001f);
+        AddReward(-0.0001f);
     }
 
     // void OnCollisionEnter(Collision col) {
